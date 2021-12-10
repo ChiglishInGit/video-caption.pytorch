@@ -61,7 +61,7 @@ def main(params):
     out['videos'] = {'train': [], 'val': [], 'test': []}
     videos = json.load(open(params['input_json'], 'r'))['videos']
     for i in videos:
-        out['videos'][i['split']].append(int(i['id']))
+        out['videos'][i['split']].append(int(i['video_id'][2:7]))
     json.dump(out, open(params['info_json'], 'w'))
     json.dump(video_caption, open(params['caption_json'], 'w'))
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     # input json
-    parser.add_argument('--input_json', type=str, default='data/videodatainfo_2017.json',
+    parser.add_argument('--input_json', type=str, default='data/videodatainfo.json',
                         help='msr_vtt videoinfo json')
     parser.add_argument('--info_json', default='data/info.json',
                         help='info about iw2word and word2ix')

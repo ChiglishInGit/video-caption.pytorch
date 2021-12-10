@@ -40,7 +40,7 @@ def extract_feats(params, model, load_image_fn):
     if not os.path.isdir(dir_fc):
         os.mkdir(dir_fc)
     print("save video feats to %s" % (dir_fc))
-    video_list = glob.glob(os.path.join(params['video_path'], '*.mp4'))
+    video_list = glob.glob(os.path.join(params['video_path'], '*.avi'))
     for video in tqdm(video_list):
         video_id = video.split("/")[-1].split(".")[0]
         dst = params['model'] + '_' + video_id
@@ -69,12 +69,12 @@ if __name__ == '__main__':
     parser.add_argument("--gpu", dest='gpu', type=str, default='0',
                         help='Set CUDA_VISIBLE_DEVICES environment variable, optional')
     parser.add_argument("--output_dir", dest='output_dir', type=str,
-                        default='data/feats/resnet152', help='directory to store features')
+                        default='data/feats/test', help='directory to store features')
     parser.add_argument("--n_frame_steps", dest='n_frame_steps', type=int, default=40,
                         help='how many frames to sampler per video')
 
     parser.add_argument("--video_path", dest='video_path', type=str,
-                        default='data/train-video', help='path to video dataset')
+                        default='data/test-video', help='path to video dataset')
     parser.add_argument("--model", dest="model", type=str, default='resnet152',
                         help='the CNN model you want to use to extract_feats')
     
